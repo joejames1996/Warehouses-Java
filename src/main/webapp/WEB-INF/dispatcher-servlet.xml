@@ -83,7 +83,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 
         <property name="url" value="${JDBC_CONNECTION_STRING}"/>
-        <property name="username" value="root"/>
+        <property name="username" value="shipit"/>
         <property name="password" value="${MYSQL_PASSWORD}"/>
 
         <property name="initialSize" value="3"/>

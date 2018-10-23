@@ -58,8 +58,8 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 
         <property name="url" value="jdbc:mysql://localhost:3306/shipit_testdb"/>
-        <property name="username" value="root"/>
-        <property name="password" value="mysql"/>
+        <property name="username" value="shipit"/>
+        <property name="password" value="4F7top80960E"/>
 
         <property name="initialSize" value="3"/>
         <property name="maxActive" value="10"/>
