@@ -25,6 +25,7 @@ public class InboundOrderController extends BaseController
     private ProductDAO productDAO;
     private EmployeeDAO employeeDAO;
     private CompanyDAO companyDAO;
+    private StockInboundOrderDAO stockInboundOrderDAO;
 
     public void setStockDAO(StockDAO stockDAO)
     {
@@ -81,28 +82,30 @@ public class InboundOrderController extends BaseController
         Employee operationsManager = operationsManagers.get(0);
         sLog.debug(String.format("Found operations manager: %s", operationsManager));
 
-        List<Stock> allStock = stockDAO.getStock(warehouseId);
+//        List<Stock> allStock = stockDAO.getStock(warehouseId);
+//
+//        Map<Company, List<InboundOrderLine>> orderlinesByCompany = new HashMap<Company, List<InboundOrderLine>>();
+//
+//        for (Stock item : allStock)
+//        {
+//            Product product = productDAO.getProduct(item.getProductId());
+//            if (item.getHeld() < product.getLowerThreshold() && !product.isDiscontinued())
+//            {
+//                Company company = companyDAO.getCompany(product.getGcp());
+//                int orderQuantity = NumberUtils.max(
+//                        product.getLowerThreshold() * 3 - item.getHeld(), product.getMinimumOrderQuantity());
+//
+//                if (!orderlinesByCompany.containsKey(company))
+//                {
+//                    orderlinesByCompany.put(company, new ArrayList<InboundOrderLine>());
+//                }
+//
+//                orderlinesByCompany.get(company).add(
+//                        new InboundOrderLine(product.getGtin(), product.getName(), orderQuantity));
+//            }
+//        }
 
-        Map<Company, List<InboundOrderLine>> orderlinesByCompany = new HashMap<Company, List<InboundOrderLine>>();
-
-        for (Stock item : allStock)
-        {
-            Product product = productDAO.getProduct(item.getProductId());
-            if (item.getHeld() < product.getLowerThreshold() && !product.isDiscontinued())
-            {
-                Company company = companyDAO.getCompany(product.getGcp());
-                int orderQuantity = NumberUtils.max(
-                        product.getLowerThreshold() * 3 - item.getHeld(), product.getMinimumOrderQuantity());
-
-                if (!orderlinesByCompany.containsKey(company))
-                {
-                    orderlinesByCompany.put(company, new ArrayList<InboundOrderLine>());
-                }
-
-                orderlinesByCompany.get(company).add(
-                        new InboundOrderLine(product.getGtin(), product.getName(), orderQuantity));
-            }
-        }
+        Map<Company, List<InboundOrderLine>> orderlinesByCompany = stockInboundOrderDAO.getStockForInboundOrder(warehouseId);
 
         sLog.debug(String.format("Constructed order lines: %s", orderlinesByCompany));
 
@@ -166,5 +169,10 @@ public class InboundOrderController extends BaseController
         sLog.info("Stock levels increased");
 
         return null;
+    }
+
+    public void setStockInboundOrderDAO(StockInboundOrderDAO stockInboundOrderDAO)
+    {
+        this.stockInboundOrderDAO = stockInboundOrderDAO;
     }
 }

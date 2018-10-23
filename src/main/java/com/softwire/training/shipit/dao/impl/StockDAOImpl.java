@@ -3,6 +3,8 @@ package com.softwire.training.shipit.dao.impl;
 import com.softwire.training.shipit.dao.StockAlteration;
 import com.softwire.training.shipit.dao.StockDAO;
 import com.softwire.training.shipit.exception.InvalidStateException;
+import com.softwire.training.shipit.model.Company;
+import com.softwire.training.shipit.model.InboundOrderLine;
 import com.softwire.training.shipit.model.Stock;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.EmptyResultDataAccessException;

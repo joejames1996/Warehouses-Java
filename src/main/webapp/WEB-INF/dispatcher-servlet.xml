@@ -32,6 +32,7 @@
         <property name="stockDAO" ref="stockDAO"/>
         <property name="employeeDAO" ref="employeeDAO"/>
         <property name="companyDAO" ref="companyDAO"/>
+        <property name="stockInboundOrderDAO" ref="stockInboundOrderDAO"/>
         <property name="transactionManager" ref="transactionManager"/>
         <property name="supportedMethods" value="POST,GET"/>
     </bean>
@@ -74,6 +75,10 @@
     </bean>
 
     <bean id="companyDAO" class="com.softwire.training.shipit.dao.impl.CompanyDAOImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="stockInboundOrderDAO" class="com.softwire.training.shipit.dao.impl.StockInboundOrderDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
